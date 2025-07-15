@@ -113,3 +113,12 @@ TARGET_INCLUDE_DIRECTORIES (zstdstatic
 )
 
 ADD_LIBRARY(zstd::zstd ALIAS zstdstatic)
+
+IF (NOT BUILD_SHARED_LIBS)
+    IF (NOT WITH_SYSTEM_ZSTD)
+        INSTALL (TARGETS zstdstatic
+            ARCHIVE DESTINATION lib
+            LIBRARY DESTINATION lib
+        )
+    ENDIF()
+ENDIF()
